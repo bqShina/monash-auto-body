@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
+
+/************************** Form ***************************/
+:root {
+    --border-color: #dee2e6;
+    --header-color: #F9F9F9;
+    --mark-text-color: #5f5f5f;
+    --footer-color: #212A3E;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+h2.form-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.optional-mark {
+ color: var(--mark-text-color);
+ font-size: 14px;
+ font-weight: 400;
+}
+
+.fill-table {
+    position: relative;
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    margin: 40px auto;
+    border-radius: .5rem;
+    width: 70%;
+    max-width: 800px;
+}
+
+.page-number {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+}
+
+.button-area {
+    margin-top: .5rem;
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end;
+}
+.hr-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 30px auto 20px;
+    width: 95%;
+}
+
+.hr-container hr {
+    flex-grow: 1;
+    height: 1px;
+    border: none;
+    background-color: black;
+}
+
+.hr-title {
+    padding: 0 20px;
+    color: #4e4e4e;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.repair-confirm-content {
+    margin-top: 30px;
+}
+
+@media (max-width: 600px) {
+    .fill-table {
+        width: 90%;
+    }
+}
+
+/************************** NavBar ***************************/
+.header {
+    background-color: var(--header-color);
+    
+}
+.custom-brand {
+    color: black;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 23px;
+}
+
+.nav-item-link {
+    color: black;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.custom-navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 992px) {
+    .login-btn {
+        margin-top: 30px;
+    }
+}
+
+
+/************************** Heading ***************************/
+.heading {
+    color: var(--header-color);
+    font-weight: 700;
+    padding: 5% 8%;
+    background: linear-gradient(to bottom, #394867 0%, #212A3E 100%);;
+}
+
+/************************** signature pad ***************************/
+.signature-pad {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    width: 400px;
+    height: 150px;
+
+}
+.signature-pad.sign-center {
+    text-align: center;
+    padding: 3% 2%;
+}
+.save-signature {
+    margin-right: 20px;
+}
+.save-signature, .clear-signature {
+    margin-top: 15px;
+}
+
+/************************** success content ***************************/
+/* .success-centent {
+    /* padding: 7% 8%; */
+
+
+.success-container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/************************** profile ***************************/
+.profile-container {
+    margin: auto;
+    padding: 5% 8%;
+}
+.alert.alert-primary.profile-alert {
+    top: 20rem;
+}
+.profile-title {
+    text-align: left;
+}
+
+.profile-info .column {
+    display: flex;
+    align-items: baseline;
+}
+
+.column label {
+    flex: 1;
+    /* Grow to take available space */
+    white-space: nowrap;
+    /* Prevent label from breaking to the next line */
+    margin-right: 10px;
+    /* Add some spacing between label and input */
+}
+
+.profile-buttons {
+    text-align: right;
+    /* padding-right: 20px; */
+}
+.cancel-btn {
+    margin-right: 20px;
+}
+
+.service-tags {
+    display: flex;
+    margin: 30px 0;
+}
+
+.service-tags .btn {
+    margin-right: 30px;
+}
+
+/************************** record table ***************************/
+.table-btn { 
+    margin-right: 10px;
+}
+
+.client-table, .success-container, .profile-container {
+    min-height: 60vh;
+    padding: 5% 8%;
+}
+
+.client-table {
+    position: relative;
+}
+p.no-records {
+    text-align: center;
+    color: #5f5f5f;
+    font-size: 18px;
+    font-style: italic;
+    
+}
+.alert.alert-primary {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+/************************** Sign in / Login ***************************/
+.form-signin {
+    min-width: 330px;
+    padding: 1rem;
+    margin: auto;
+    width: 35%;
+    min-height: 60vh;
+    position: relative;
+}
+.logo-signin {
+    margin: 50px auto 30px;
+}
+.back-btn-container {
+    display: flex;
+    justify-content: center;
+}
+.back-btn-container .back-btn {
+
+    padding: 0;
+}
+/************************** Add Account ***************************/
+.alert.alert-primary.add-acount-alert {
+    position: relative;
+    top: 1rem;
+    width: 90%;
+}
+
+/************************** Update Password ***************************/
+.password-criteria {
+    list-style: none;
+    padding: 0;
+}
+
+.password-criteria li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.password-criteria li::before {
+    content: "•";
+    /* Bullet point character */
+    color: #007bff;
+    /* Change the color to your preference */
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+/************************** Modal ***************************/
+.password-form-container, .account-form-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    padding: 5%;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 488px;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    animation: slideIn 0.6s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.modal-content {
+    background-color: rgb(28, 27, 27);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.closeIcon {
+    padding: 10px;
+    font-size: 25px;
+}
+
+.modal__background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    /* Semi-transparent background color */
+    backdrop-filter: blur(8px);
+    /* Apply a blur effect */
+    z-index: 1000;
+    /* Adjust the z-index to make sure it's below the modal */
+}
+/************************** Footer ***************************/
+.footer-container {
+    background-color: #212A3E;
+    color: var(--header-color);
+    font-size: 15px;
+    /* margin-top: 50px; */
+    padding: 3%;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.wrapper {
+    min-height: 50vh;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.footer-container {
+    margin-top: auto;
+}
+
+.copyright-area {
+    padding: 30px 0;
+    
+}
+
+.copyright-inner-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.copyright-area ul,
+.copyright-end {
+    text-align: center;
+}
+
+.copyright-area ul li {
+    display: inline-flex;
+}
+.copyright-area ul li a {
+    color: var(--header-color);
+    text-decoration: none;
+}
+
+.copyright-area ul li:not(:last-child) {
+    margin-right: 5px;
+}
+
+@media (max-width: 1024px) {
+    .copyright-area {
+        text-align: center;
+    }
+
+    .copyright-inner-container {
+        flex-direction: column;
+    }
+
+    .copyright-area ul {
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 530px) {
+    .copyright-area ul {
+        margin-bottom: 25px;
+    }
+}
