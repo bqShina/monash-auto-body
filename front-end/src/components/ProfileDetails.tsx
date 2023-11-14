@@ -10,6 +10,7 @@ import {
   updateUserInfo,
 } from "../dataStructures/repository";
 import { User } from "../dataStructures/dataTemplate";
+import { useNavigate } from "react-router-dom";
 
 export const ProfileDetails = () => {
   const [isEditable, setIsEditable] = useState(false);
@@ -24,6 +25,7 @@ export const ProfileDetails = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [allUsers, setAllUsers] = useState<User[]>([]);
   const [deleted, setDeleted] = useState(false);
+  const navigate = useNavigate();
 
   const handleOnClick = () => {
     setIsEditable(!isEditable);
@@ -36,7 +38,8 @@ export const ProfileDetails = () => {
     setShowAlert(true);
     setUser(fields);
     setTimeout(() => {
-      window.location.reload();
+      // window.location.reload();
+      navigate("/profile");
     }, 2000);
   };
 
@@ -70,7 +73,8 @@ export const ProfileDetails = () => {
     setShowAlert(true);
     // fetchRecords();
     setTimeout(() => {
-      window.location.reload();
+      // window.location.reload();
+      navigate("/profile");
     }, 2000);
   };
 
