@@ -8,7 +8,7 @@ export const RecordsPage = () => {
   return (
     <>
       <NavBar />
-      <Heading title="Client records" />
+      <Heading title="Client Records" />
       <ClientTable />
       <Footer />
     </>

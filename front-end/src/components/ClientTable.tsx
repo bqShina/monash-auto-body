@@ -41,13 +41,21 @@ export const ClientTable = () => {
   return (
     <>
       {console.log(clientList)}
-      <div className="container mt-5 client-table">
+      <div className="container mt-3 client-table">
         {showAlert && (
           <div className="alert alert-primary" role="alert">
             You have deleted the record successfully
           </div>
         )}
 
+        <Link
+          to="https://docs.google.com/spreadsheets/d/1ojo97472vg-djrLTpqYTQs7uKHF__AK3CpQQx1C0YVw/edit#gid=0"
+          target="_blank"
+        >
+          <button className="btn btn-outline-dark btn-sm mb-3">
+            Google Sheet
+          </button>
+        </Link>
         <div className="row justify-content-center">
           <div className="col-md-12">
             {clientList.length === 0 ? (
