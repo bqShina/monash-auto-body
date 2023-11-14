@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_HOST = "https://monash-auto-body.onrender.com";
-const GOOGLE_API = "https://script.google.com/macros/s/AKfycbxS4_1fKzaXh46kh1wxR3_1Kh1UnWDPvGqbNlPAz8Ur76ch72VRV5duzcNOvAGqvoG5Ag/exec";
+const GOOGLE_API = "https://script.google.com/macros/s/AKfycbzrR5yH4RLOebTe05oZXfprpseCa4ZK0NYy1Tr4k7jgPZgTDh9PZAFEBUECp56bQsyv/exec";
 const USER_KEY = "user";
 
 async function getUsers() {
