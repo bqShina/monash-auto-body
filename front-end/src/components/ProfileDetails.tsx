@@ -38,8 +38,7 @@ export const ProfileDetails = () => {
     setShowAlert(true);
     setUser(fields);
     setTimeout(() => {
-      // window.location.reload();
-      navigate("/profile");
+      window.location.reload();
     }, 2000);
   };
 
@@ -73,8 +72,7 @@ export const ProfileDetails = () => {
     setShowAlert(true);
     // fetchRecords();
     setTimeout(() => {
-      // window.location.reload();
-      navigate("/profile");
+      window.location.reload();
     }, 2000);
   };
 
