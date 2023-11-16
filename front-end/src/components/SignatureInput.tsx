@@ -80,6 +80,9 @@ export const SignatureInput: React.FC<Props> = ({ fields, updateFields }) => {
           </button>
         </div>
       )}
+      <small className="warning mt-5">
+        Remember to click 'Save' to save the signature
+      </small>
     </>
   );
 };

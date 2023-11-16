@@ -107,21 +107,27 @@ export const Form = () => {
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
       <VehicleForm
+        key={"yourVehicle"}
         title="Your Vehicle Details"
+        editForm={editForm}
         yourVehicle={true}
         thirdVehicle={false}
         fields={fields1}
         updateFields={updateFields1}
       />,
       <VehicleForm
+        key={"offendingVehicle"}
         title="Offending Vehicle Details"
+        editForm={editForm}
         yourVehicle={false}
         thirdVehicle={false}
         fields={fields2}
         updateFields={updateFields2}
       />,
       <VehicleForm
+        key={"thirdVehicle"}
         title="Third Vehicle Details"
+        editForm={editForm}
         yourVehicle={false}
         thirdVehicle={true}
         fields={fields3}
