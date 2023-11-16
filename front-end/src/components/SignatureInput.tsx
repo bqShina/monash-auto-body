@@ -37,30 +37,39 @@ export const SignatureInput: React.FC<Props> = ({ fields, updateFields }) => {
   return (
     <>
       {!showSign && (
-        <div className="sign">
-          <div className="signature-pad">
-            <SignatureCanvas
-              ref={(data) => setSign(data)}
-              //   onEnd={handleCanvasChange}
-              penColor="black"
-              canvasProps={{ width: 400, height: 150, className: "sigCanvas" }}
-            />
+        <>
+          <div className="sign mb-3">
+            <div className="signature-pad">
+              <SignatureCanvas
+                ref={(data) => setSign(data)}
+                //   onEnd={handleCanvasChange}
+                penColor="black"
+                canvasProps={{
+                  width: 400,
+                  height: 150,
+                  className: "sigCanvas",
+                }}
+              />
+            </div>
+            <button
+              type="button"
+              className="btn btn-light save-signature"
+              onClick={handleSave}
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={handleClear}
+              className="btn btn-light clear-signature"
+            >
+              Clear
+            </button>
           </div>
-          <button
-            type="button"
-            className="btn btn-light save-signature"
-            onClick={handleSave}
-          >
-            Save
-          </button>
-          <button
-            type="button"
-            onClick={handleClear}
-            className="btn btn-light clear-signature"
-          >
-            Clear
-          </button>
-        </div>
+          <small className="warning">
+            Remember to click 'Save' button or the signature will not be saved.
+          </small>
+        </>
       )}
       {showSign && (
         <div className="show-signature">
@@ -80,9 +89,6 @@ export const SignatureInput: React.FC<Props> = ({ fields, updateFields }) => {
           </button>
         </div>
       )}
-      <small className="warning mt-5">
-        Remember to click 'Save' to save the signature
-      </small>
     </>
   );
 };
