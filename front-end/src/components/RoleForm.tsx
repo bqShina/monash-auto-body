@@ -4,6 +4,7 @@ import { VehiclesData } from "../dataStructures/dataTemplate";
 
 interface Props {
   role: string;
+  isSameDriver: boolean;
   yourVehicle: boolean;
   thirdVehicle: boolean;
   fields: VehiclesData;
@@ -12,6 +13,7 @@ interface Props {
 
 export const RoleForm = ({
   role,
+  isSameDriver,
   yourVehicle,
   thirdVehicle,
   fields,
@@ -34,11 +36,18 @@ export const RoleForm = ({
             type="text"
             className="form-control"
             value={isDriver ? fields.nameDriver : fields.nameOwner}
-            onChange={(e) =>
-              isDriver
-                ? updateFields({ nameDriver: e.target.value })
-                : updateFields({ nameOwner: e.target.value })
-            }
+            onChange={(e) => {
+              if (isSameDriver) {
+                updateFields({
+                  nameDriver: e.target.value,
+                  nameOwner: e.target.value,
+                });
+              } else {
+                isDriver
+                  ? updateFields({ nameDriver: e.target.value })
+                  : updateFields({ nameOwner: e.target.value });
+              }
+            }}
             required={!thirdVehicle}
           />
         </div>
@@ -51,11 +60,22 @@ export const RoleForm = ({
             type="text"
             className="form-control"
             value={isDriver ? fields.contactNumDriver : fields.contactNumOwner}
-            onChange={(e) =>
-              isDriver
-                ? updateFields({ contactNumDriver: e.target.value })
-                : updateFields({ contactNumOwner: e.target.value })
-            }
+            onChange={(e) => {
+              if (isSameDriver) {
+                updateFields({
+                  contactNumDriver: e.target.value,
+                  contactNumOwner: e.target.value,
+                });
+              } else {
+                isDriver
+                  ? updateFields({
+                      contactNumDriver: e.target.value,
+                    })
+                  : updateFields({
+                      contactNumOwner: e.target.value,
+                    });
+              }
+            }}
             required={!thirdVehicle}
           />
         </div>
@@ -68,11 +88,18 @@ export const RoleForm = ({
           type="text"
           className="form-control"
           value={isDriver ? fields.addressDriver : fields.addressOwner}
-          onChange={(e) =>
-            isDriver
-              ? updateFields({ addressDriver: e.target.value })
-              : updateFields({ addressOwner: e.target.value })
-          }
+          onChange={(e) => {
+            if (isSameDriver) {
+              updateFields({
+                addressDriver: e.target.value,
+                addressOwner: e.target.value,
+              });
+            } else {
+              isDriver
+                ? updateFields({ addressDriver: e.target.value })
+                : updateFields({ addressOwner: e.target.value });
+            }
+          }}
           required={!thirdVehicle}
         />
       </div>
@@ -83,11 +110,18 @@ export const RoleForm = ({
           type="email"
           className="form-control"
           value={isDriver ? fields.emailDriver : fields.emailOwner}
-          onChange={(e) =>
-            isDriver
-              ? updateFields({ emailDriver: e.target.value })
-              : updateFields({ emailOwner: e.target.value })
-          }
+          onChange={(e) => {
+            if (isSameDriver) {
+              updateFields({
+                emailDriver: e.target.value,
+                emailOwner: e.target.value,
+              });
+            } else {
+              isDriver
+                ? updateFields({ emailDriver: e.target.value })
+                : updateFields({ emailOwner: e.target.value });
+            }
+          }}
         />
       </div>
       <div className="mb-3">
@@ -100,11 +134,18 @@ export const RoleForm = ({
           className="form-control"
           id="datePicker"
           value={isDriver ? fields.dobDriver : fields.dobOwner}
-          onChange={(e) =>
-            isDriver
-              ? updateFields({ dobDriver: e.target.value })
-              : updateFields({ dobOwner: e.target.value })
-          }
+          onChange={(e) => {
+            if (isSameDriver) {
+              updateFields({
+                dobDriver: e.target.value,
+                dobOwner: e.target.value,
+              });
+            } else {
+              isDriver
+                ? updateFields({ dobDriver: e.target.value })
+                : updateFields({ dobOwner: e.target.value });
+            }
+          }}
           required={!thirdVehicle && !yourVehicle}
         />
       </div>
@@ -120,11 +161,18 @@ export const RoleForm = ({
             type="text"
             className="form-control"
             value={isDriver ? fields.licenceNumDriver : fields.licenceNumOwner}
-            onChange={(e) =>
-              isDriver
-                ? updateFields({ licenceNumDriver: e.target.value })
-                : updateFields({ licenceNumOwner: e.target.value })
-            }
+            onChange={(e) => {
+              if (isSameDriver) {
+                updateFields({
+                  licenceNumDriver: e.target.value,
+                  licenceNumOwner: e.target.value,
+                });
+              } else {
+                isDriver
+                  ? updateFields({ licenceNumDriver: e.target.value })
+                  : updateFields({ licenceNumOwner: e.target.value });
+              }
+            }}
             required={!thirdVehicle && !yourVehicle}
           />
         </div>
@@ -139,11 +187,18 @@ export const RoleForm = ({
             type="date"
             className="form-control"
             value={isDriver ? fields.expiryDateDriver : fields.expiryDateOwner}
-            onChange={(e) =>
-              isDriver
-                ? updateFields({ expiryDateDriver: e.target.value })
-                : updateFields({ expiryDateOwner: e.target.value })
-            }
+            onChange={(e) => {
+              if (isSameDriver) {
+                updateFields({
+                  expiryDateDriver: e.target.value,
+                  expiryDateOwner: e.target.value,
+                });
+              } else {
+                isDriver
+                  ? updateFields({ expiryDateDriver: e.target.value })
+                  : updateFields({ expiryDateOwner: e.target.value });
+              }
+            }}
             required={!thirdVehicle && !yourVehicle}
           />
         </div>

@@ -13,7 +13,6 @@ import { FormCheckInputProps } from "react-bootstrap/esm/FormCheckInput";
 
 interface Props {
   title: string;
-  editForm: boolean;
   yourVehicle: boolean;
   thirdVehicle: boolean;
   fields: VehiclesData;
@@ -22,7 +21,6 @@ interface Props {
 
 export const VehicleForm = ({
   title,
-  editForm,
   yourVehicle,
   thirdVehicle,
   fields,
@@ -176,6 +174,7 @@ export const VehicleForm = ({
           <RoleForm
             key={"owner"}
             role="Owner"
+            isSameDriver={isSameDriver}
             yourVehicle={yourVehicle}
             thirdVehicle={thirdVehicle}
             fields={fields}
@@ -198,16 +197,17 @@ export const VehicleForm = ({
           {/* )} */}
         </>
       )}
-      {/* {!isSameDriver && ( */}
-      <RoleForm
-        key={"driver"}
-        role="Driver"
-        yourVehicle={yourVehicle}
-        thirdVehicle={thirdVehicle}
-        fields={fields}
-        updateFields={updateFields}
-      />
-      {/* )} */}
+      {!isSameDriver && (
+        <RoleForm
+          key={"driver"}
+          role="Driver"
+          isSameDriver={isSameDriver}
+          yourVehicle={yourVehicle}
+          thirdVehicle={thirdVehicle}
+          fields={fields}
+          updateFields={updateFields}
+        />
+      )}
     </>
   );
 };
