@@ -86,7 +86,9 @@ const vehiclePdf = (doc, vehicle, vehicleType, positionX, positionY) => {
   positionY = changeLine(gap, doc);
   if (vehicleType === 2 || vehicleType === 3) {
     doc.font("Times-Roman").text("Insured: ", positionX, positionY);
-    doc.font("Times-Bold").text(vehicle.insured, positionX + 45, positionY);
+    doc
+      .font("Times-Bold")
+      .text(vehicle.insured ? vehicle.insured : " ", positionX + 45, positionY);
     if (vehicle.insured === "Y") {
       doc.font("Times-Roman").text("Insurer: ", positionX + 75, positionY);
       doc.font("Times-Bold").text(vehicle.insurer, positionX + 118, positionY);
@@ -179,7 +181,11 @@ const rolePdf = (doc, isDriver, vehicle, vehicleType, positionX, positionY) => {
       .text("Insured? ", positionX + middlePostion, positionY);
     doc
       .font("Times-Bold")
-      .text(vehicle.insured, positionX + middlePostion + 45, positionY);
+      .text(
+        vehicle.insured ? vehicle.insured : " ",
+        positionX + middlePostion + 45,
+        positionY
+      );
     if (vehicle.insured === "Y") {
       doc
         .font("Times-Roman")
