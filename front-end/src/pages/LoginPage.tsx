@@ -43,7 +43,7 @@ export const LoginPage = () => {
       const temp = { ...fields };
       temp.password = "";
       setFields(temp);
-
+      // console.log("password wrong");
       setErrorMessage("Username or password invalid, please try again.");
     }
   };
