@@ -184,7 +184,7 @@ export const Form = () => {
 
       if (!editForm) {
         addRecord(FINAL_DATA);
-        saveRecordIntoGoogleSheet(FINAL_DATA);
+        // saveRecordIntoGoogleSheet(FINAL_DATA);
       } else {
         updateRecord(FINAL_DATA, passedData._id);
         // saveRecordIntoGoogleSheet(FINAL_DATA);
