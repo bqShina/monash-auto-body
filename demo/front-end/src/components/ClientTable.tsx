@@ -65,6 +65,7 @@ export const ClientTable = () => {
                 <thead>
                   <tr>
                     <th>#</th>
+                    <th>Owner Name</th>
                     <th>Model</th>
                     <th>Vehicle Registration</th>
                     <th>Action</th>
@@ -74,6 +75,7 @@ export const ClientTable = () => {
                   {clientList.map((client, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
+                      <td>{client.vehicleDetails.nameOwner}</td>
                       <td>{client.vehicleDetails.model}</td>
                       <td>{client.vehicleDetails.vehicleRegistration}</td>
                       <td>
