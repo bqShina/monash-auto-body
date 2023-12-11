@@ -220,6 +220,12 @@ p.no-records {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+@media (max-width: 1199px) {
+    .table-btn {
+        margin-bottom: 10px;
+    }
+}
 /************************** Sign in / Login ***************************/
 .form-signin {
     min-width: 330px;

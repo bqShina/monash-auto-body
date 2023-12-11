@@ -192,7 +192,7 @@ export const Form = () => {
 
       setupLocalStorage(initialFields);
       // localStorage.clear();
-      navigate("/success", { state: editForm }); // +++++ to be edit
+      navigate("/success", { state: editForm });
     } else {
       next();
     }
