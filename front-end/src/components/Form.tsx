@@ -66,29 +66,22 @@ export const Form = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const passedData = location.state;
-  const { id } = useParams();
+  // const { id } = useParams();
 
-  const editForm = passedData !== null || id !== undefined;
+  const editForm = passedData !== null;
   // let initialField: Record | FormState = initialFields;
   let initialField: Record | FormState = initialFields;
 
   // const fetchData = async () => {
   // useEffect(() => {
-  const loadData = async () => {
-    if (editForm && id !== undefined) {
-      initialField = await getRecordById(id);
-    } else if (editForm && passedData !== null) {
-      initialField = passedData;
-    }
-    // if () {
+  if (editForm) {
+    initialField = passedData;
+  } else {
     setupLocalStorage(initialField);
-    // }
-    if (editForm || !localStorage.getItem("vehicleDetails")) {
-      setupLocalStorage(initialField);
-    }
-  };
-  loadData();
-  // }, [editForm, id, passedData]);
+  }
+  if (editForm || !localStorage.getItem("vehicleDetails")) {
+    setupLocalStorage(initialField);
+  }
 
   const getItemFromLocalStorage = (key: string) => {
     const item = localStorage.getItem(key);

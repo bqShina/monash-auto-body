@@ -36,8 +36,8 @@ export const ClientTable = () => {
   };
 
   const handleClick = (client: Record) => {
-    // navigate("/update", { state: client });
-    navigate(`/update/${client._id}`);
+    navigate("/update", { state: client });
+    // navigate(`/update/${client._id}`);
   };
   return (
     <>

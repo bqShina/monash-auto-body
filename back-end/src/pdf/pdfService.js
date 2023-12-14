@@ -71,6 +71,7 @@ const orderedList = (doc, number, content, positionX, positionY) => {
 const vehiclePdf = (doc, vehicle, vehicleType, positionX, positionY) => {
   positionY = changeLine(0.7, doc);
   doc.font("Times-Roman").text("Make, Model, Year: ", positionX, positionY);
+  // if (doc.x >
   doc.font("Times-Bold").text(vehicle.model, positionX + 100, positionY);
 
   doc
@@ -115,6 +116,10 @@ const vehiclePdf = (doc, vehicle, vehicleType, positionX, positionY) => {
 const changeLine = (gap, doc) => {
   doc.moveDown(gap);
   return doc.y;
+};
+const checkBehindMiddle = (doc) => {
+  const middle = doc.page.width / 2;
+  return doc.x > middle;
 };
 
 const rolePdf = (doc, isDriver, vehicle, vehicleType, positionX, positionY) => {
