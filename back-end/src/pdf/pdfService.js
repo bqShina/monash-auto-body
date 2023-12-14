@@ -253,9 +253,16 @@ const rolePdf = (doc, isDriver, vehicle, vehicleType, positionX, positionY) => {
 
 const createPdf = async (record, res) => {
   // initialize document
+  const marginSize = 30;
   const doc = new PDFDocument({
-    margins: { top: 40, bottom: 30, left: 30, right: 30 },
+    margins: {
+      top: 40,
+      bottom: marginSize,
+      left: marginSize,
+      right: marginSize,
+    },
   });
+  const pageWidth = doc.page.width;
 
   //----------------- header -------------------------
   let positionY = doc.y;
@@ -436,7 +443,13 @@ const createPdf = async (record, res) => {
         ? record.accidentDetails.accidentPlace
         : " ",
       positionX + 35,
-      positionY
+      positionY,
+      {
+        width: middlePostion - 10,
+        height: 10,
+        align: "left", // You can adjust the alignment as needed (left, right, center)
+        ellipsis: true, // Add ellipsis if the text doesn't fit within the box
+      }
     );
   positionY = changeLine(gap, doc);
   doc.font("Times-Roman").text("Description: ", positionX, positionY);
@@ -662,6 +675,39 @@ const createPdf = async (record, res) => {
     })
     .font("Times-Bold")
     .text(record.vehicleDetails.vehicleRegistration);
+
+  // ---------------------------- more images -----------------------------
+  if (record.accidentDetails.accidentCarImage.length > 1) {
+    const images = record.accidentDetails.accidentCarImage;
+    const length = record.accidentDetails.accidentCarImage.length;
+    positionY = changeLine(5, doc);
+    // doc.addPage();
+    const columnCount = 2; // Adjust the number of columns in the gallery
+    const imageGap = 0.01; // Adjust the gap between images
+
+    const imageWidth =
+      (pageWidth - 2 * marginSize - (columnCount + 1) * imageGap) / columnCount;
+    // console.log(imageWidth);
+    const imageHeight = 200;
+    subHeading(doc, "MORE VEHICLE DAMAGED IMAGES", positionX, positionY);
+    positionY = changeLine(gap, doc);
+
+    let currentX = marginSize; // Initialize currentX for horizontal positioning
+
+    for (let i = 0; i < length; i++) {
+      doc.image(images[i], currentX, positionY, {
+        fit: [imageWidth, imageHeight],
+      });
+
+      currentX += imageWidth;
+
+      // Check if the next image will exceed the page width
+      if (currentX + imageWidth > pageWidth) {
+        currentX = marginSize; // Start a new row
+        positionY = changeLine(imageGap, doc); // Move to the next line
+      }
+    }
+  }
 
   // ---------------------------- end -----------------------------
   res.setHeader("Content-Disposition", 'attachment; filename="record.pdf"');
