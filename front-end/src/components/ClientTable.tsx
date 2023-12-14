@@ -36,7 +36,8 @@ export const ClientTable = () => {
   };
 
   const handleClick = (client: Record) => {
-    navigate("/update", { state: client });
+    // navigate("/update", { state: client });
+    navigate(`/update/${client._id}`);
   };
   return (
     <>
@@ -80,7 +81,7 @@ export const ClientTable = () => {
                       <td>{client.vehicleDetails.vehicleRegistration}</td>
                       <td>
                         {/* <div className="btn-group" role="group"> */}
-                        {/* <Link to={`/${client._id}`}> */}
+                        {/* <Link to={`update/${client._id}`}> */}
                         <button
                           className="btn btn-outline-primary btn-sm table-btn"
                           onClick={() => handleClick(client)}

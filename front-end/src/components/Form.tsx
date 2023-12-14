@@ -10,6 +10,7 @@ import { initialFields } from "../dataStructures/dataInitial";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   addRecord,
+  getRecordById,
   saveRecordIntoGoogleSheet,
   updateRecord,
 } from "../dataStructures/repository";
@@ -60,23 +61,35 @@ const setupLocalStorage = (initialField: Record | FormState) => {
 // };
 
 export const Form = () => {
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const passedData = location.state;
+  const { id } = useParams();
 
-  const editForm = passedData !== null;
+  const editForm = passedData !== null || id !== undefined;
   // let initialField: Record | FormState = initialFields;
   let initialField: Record | FormState = initialFields;
 
   // const fetchData = async () => {
-  if (editForm) {
-    initialField = passedData;
-  } else {
+  // useEffect(() => {
+  const loadData = async () => {
+    if (editForm && id !== undefined) {
+      initialField = await getRecordById(id);
+    } else if (editForm && passedData !== null) {
+      initialField = passedData;
+    }
+    // if () {
     setupLocalStorage(initialField);
-  }
-  if (editForm || !localStorage.getItem("vehicleDetails")) {
-    setupLocalStorage(initialField);
-  }
+    // }
+    if (editForm || !localStorage.getItem("vehicleDetails")) {
+      setupLocalStorage(initialField);
+    }
+  };
+  loadData();
+  // }, [editForm, id, passedData]);
+
   const getItemFromLocalStorage = (key: string) => {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : null;
@@ -172,31 +185,52 @@ export const Form = () => {
     // if (currentStepIndex === 7) {
 
     if (currentStepIndex === 6) {
-      const FINAL_DATA: FormState = {
-        vehicleDetails: fields1,
-        offendingVehicle: fields2,
-        thirdVehicle: fields3,
-        witnessDetails: fields4,
-        accidentDetails: fields5,
-        repairConfirmation: fields6,
-        legalAgreement: fields7,
-      };
+      if (fields7.signature !== "") {
+        const FINAL_DATA: FormState = {
+          vehicleDetails: fields1,
+          offendingVehicle: fields2,
+          thirdVehicle: fields3,
+          witnessDetails: fields4,
+          accidentDetails: fields5,
+          repairConfirmation: fields6,
+          legalAgreement: fields7,
+        };
 
-      if (!editForm) {
-        addRecord(FINAL_DATA);
-        saveRecordIntoGoogleSheet(FINAL_DATA);
-      } else {
-        updateRecord(FINAL_DATA, passedData._id);
-        // saveRecordIntoGoogleSheet(FINAL_DATA);
+        if (!editForm) {
+          addRecord(FINAL_DATA);
+          saveRecordIntoGoogleSheet(FINAL_DATA);
+        } else {
+          updateRecord(FINAL_DATA, passedData._id);
+          // saveRecordIntoGoogleSheet(FINAL_DATA);
+        }
+
+        setupLocalStorage(initialFields);
+        // localStorage.clear();
+        if (errorMessage !== "") {
+          setErrorMessage("");
+        }
+        if (showErrorMessage) {
+          setShowErrorMessage(false);
+        }
+
+        navigate("/success", { state: editForm });
       }
-
-      setupLocalStorage(initialFields);
-      // localStorage.clear();
-      navigate("/success", { state: editForm });
+      setErrorMessage(
+        "You have not signed the agreement or saved your signature yet."
+      );
+      setShowErrorMessage(true);
     } else {
       next();
     }
   };
+
+  const handleBack = () => {
+    if (showErrorMessage) {
+      setShowErrorMessage(false);
+    }
+    back();
+  };
+
   return (
     <>
       <div className="wrapper">
@@ -206,9 +240,19 @@ export const Form = () => {
           </div>
 
           {step}
+          {showErrorMessage && (
+            <small className="error">
+              <strong>{errorMessage}</strong>
+            </small>
+          )}
+
           <div className="button-area">
             {!isFirstStep && (
-              <button type="button" className="btn btn-primary" onClick={back}>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleBack}
+              >
                 Back
               </button>
             )}

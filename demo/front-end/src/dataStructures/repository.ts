@@ -68,7 +68,8 @@ async function deleteUser(id: string) {
 // ----------------------------- record ------------------------------
 async function addRecord(record: object) {
     const response = await axios.post(API_HOST + "/api/records", record);
-
+    // send email remainder
+    
     return response.data;
 }
 
