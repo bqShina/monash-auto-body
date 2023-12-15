@@ -71,17 +71,30 @@ const orderedList = (doc, number, content, positionX, positionY) => {
 const vehiclePdf = (doc, vehicle, vehicleType, positionX, positionY) => {
   positionY = changeLine(0.7, doc);
   doc.font("Times-Roman").text("Make, Model, Year: ", positionX, positionY);
-  // if (doc.x >
+
   doc.font("Times-Bold").text(vehicle.model, positionX + 100, positionY);
+  // let tempPosition = middlePostion;
+  // // Get the width of the printed text
+  // const textWidth = doc.widthOfString(vehicle.model);
+
+  // // Get the current X position after printing text
+  // const currentX = positionX + 100 + textWidth;
+
+  // Check if the current position is behind the middle
+  // if (checkBehindMiddle(vehicle.model, positionX, doc)) {
+  //   tempPosition = currentX + 10;
+  // }
+
+  const tempPosition = checkBehindMiddle(vehicle.model, positionX, doc);
 
   doc
     .font("Times-Roman")
-    .text("Vehicle Registration: ", positionX + middlePostion, positionY);
+    .text("Vehicle Registration: ", positionX + tempPosition, positionY);
   doc
     .font("Times-Bold")
     .text(
       vehicle.vehicleRegistration ? vehicle.vehicleRegistration : " ",
-      positionX + middlePostion + 105,
+      positionX + tempPosition + 105,
       positionY
     );
   positionY = changeLine(gap, doc);
@@ -117,9 +130,17 @@ const changeLine = (gap, doc) => {
   doc.moveDown(gap);
   return doc.y;
 };
-const checkBehindMiddle = (doc) => {
-  const middle = doc.page.width / 2;
-  return doc.x > middle;
+const checkBehindMiddle = (str, positionX, doc) => {
+  // Get the width of the printed text
+  const textWidth = doc.widthOfString(str);
+
+  // Get the current X position after printing text
+  const currentX = positionX + 100 + textWidth;
+  const middle = 313;
+  if (currentX > middle) {
+    return currentX + 5;
+  }
+  return middlePostion;
 };
 
 const rolePdf = (doc, isDriver, vehicle, vehicleType, positionX, positionY) => {
@@ -132,14 +153,15 @@ const rolePdf = (doc, isDriver, vehicle, vehicleType, positionX, positionY) => {
       positionX + 75,
       positionY
     );
+  const tempPosition = checkBehindMiddle(
+    isDriver ? vehicle.nameOwner : vehicle.nameDriver,
+    positionX,
+    doc
+  );
 
   doc
     .font("Times-Roman")
-    .text(
-      `${role} Contact No / Mobile: `,
-      positionX + middlePostion,
-      positionY
-    );
+    .text(`${role} Contact No / Mobile: `, positionX + tempPosition, positionY);
   doc
     .font("Times-Bold")
     .text(
@@ -150,7 +172,7 @@ const rolePdf = (doc, isDriver, vehicle, vehicleType, positionX, positionY) => {
         : vehicle.contactNumOwner
         ? vehicle.contactNumOwner
         : " ",
-      positionX + middlePostion + 145,
+      positionX + tempPosition + 145,
       positionY
     );
   positionY = changeLine(gap, doc);
@@ -676,8 +698,9 @@ const createPdf = async (record, res) => {
     .font("Times-Bold")
     .text(record.vehicleDetails.vehicleRegistration);
 
-  // ---------------------------- more images -----------------------------
+  // ---------------------------- more accident details -----------------------------
   if (record.accidentDetails.accidentCarImage.length > 1) {
+    const descriptionGap = 0.01;
     const images = record.accidentDetails.accidentCarImage;
     const length = record.accidentDetails.accidentCarImage.length;
     positionY = changeLine(5, doc);
@@ -689,9 +712,21 @@ const createPdf = async (record, res) => {
       (pageWidth - 2 * marginSize - (columnCount + 1) * imageGap) / columnCount;
     // console.log(imageWidth);
     const imageHeight = 200;
-    subHeading(doc, "MORE VEHICLE DAMAGED IMAGES", positionX, positionY);
+    subHeading(doc, "MORE ACCIDENT DETAILS", positionX, positionY);
     positionY = changeLine(gap, doc);
 
+    doc.font("Times-Roman").text("Place: ", positionX, positionY);
+    doc
+      .font("Times-Bold")
+      .text(
+        record.accidentDetails.accidentPlace
+          ? record.accidentDetails.accidentPlace
+          : " ",
+        positionX + 35,
+        positionY
+      );
+
+    positionY = changeLine(descriptionGap, doc);
     let currentX = marginSize; // Initialize currentX for horizontal positioning
 
     for (let i = 0; i < length; i++) {
@@ -704,9 +739,25 @@ const createPdf = async (record, res) => {
       // Check if the next image will exceed the page width
       if (currentX + imageWidth > pageWidth) {
         currentX = marginSize; // Start a new row
-        positionY = changeLine(imageGap, doc); // Move to the next line
+        positionY = changeLine(imageGap, doc);
+        // doc.text(" "); // Move to the next line
+        // if (positionY > doc.page.height - imageHeight - marginSize) {
+        //   positionY = changeLine(5, doc);
+        // }
       }
     }
+    positionY = changeLine(gap, doc);
+    doc.font("Times-Roman").text("Description: ", positionX, positionY);
+    positionY = changeLine(descriptionGap, doc);
+    doc
+      .font("Times-Bold")
+      .text(
+        record.accidentDetails.accidentDescription
+          ? record.accidentDetails.accidentDescription
+          : " ",
+        positionX,
+        positionY
+      );
   }
 
   // ---------------------------- end -----------------------------
