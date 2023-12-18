@@ -127,7 +127,11 @@ export const RoleForm = ({
       <div className="mb-3">
         <label htmlFor="datePicker" className="form-label">
           Date of Birth{" "}
-          {!thirdVehicle && !yourVehicle && <span className="required">*</span>}
+          {!thirdVehicle && !yourVehicle && (
+            <span className="required small-font">
+              (strongly recommended to fill)
+            </span>
+          )}
         </label>
         <input
           type="date"
@@ -146,7 +150,7 @@ export const RoleForm = ({
                 : updateFields({ dobOwner: e.target.value });
             }
           }}
-          required={!thirdVehicle && !yourVehicle}
+          // required={!thirdVehicle && !yourVehicle}
         />
       </div>
       <div className="row">
@@ -154,7 +158,9 @@ export const RoleForm = ({
           <label className="form-label">
             Licence No{" "}
             {!thirdVehicle && !yourVehicle && (
-              <span className="required">*</span>
+              <span className="required small-font">
+                (strongly recommended to fill)
+              </span>
             )}
           </label>
           <input
@@ -173,14 +179,16 @@ export const RoleForm = ({
                   : updateFields({ licenceNumOwner: e.target.value });
               }
             }}
-            required={!thirdVehicle && !yourVehicle}
+            // required={!thirdVehicle && !yourVehicle}
           />
         </div>
         <div className="col-md-6 mb-3">
           <label className="form-label">
             Expiry Date{" "}
             {!thirdVehicle && !yourVehicle && (
-              <span className="required">*</span>
+              <span className="required small-font">
+                (strongly recommended to fill)
+              </span>
             )}
           </label>
           <input
@@ -199,7 +207,7 @@ export const RoleForm = ({
                   : updateFields({ expiryDateOwner: e.target.value });
               }
             }}
-            required={!thirdVehicle && !yourVehicle}
+            // required={!thirdVehicle && !yourVehicle}
           />
         </div>
       </div>
