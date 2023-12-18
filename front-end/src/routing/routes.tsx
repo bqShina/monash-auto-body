@@ -9,7 +9,7 @@ import { ProfilePage } from "../pages/ProfilePage";
 export const router = createBrowserRouter([
   { path: "/", element: <FormPage /> },
   { path: "/update", element: <FormPage /> },
-  { path: "/update/:id", element: <FormPage /> },
+  // { path: "/update/:id", element: <FormPage /> },
   { path: "/login", element: <LoginPage /> },
   { path: "/records", element: <RecordsPage /> },
   { path: "/profile", element: <ProfilePage /> },
