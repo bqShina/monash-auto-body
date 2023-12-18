@@ -149,12 +149,12 @@ const rolePdf = (doc, isDriver, vehicle, vehicleType, positionX, positionY) => {
   doc
     .font("Times-Bold")
     .text(
-      isDriver ? vehicle.nameOwner : vehicle.nameDriver,
+      isDriver ? vehicle.nameDriver : vehicle.nameOwner,
       positionX + 75,
       positionY
     );
   const tempPosition = checkBehindMiddle(
-    isDriver ? vehicle.nameOwner : vehicle.nameDriver,
+    isDriver ? vehicle.nameDriver : vehicle.nameOwner,
     positionX,
     doc
   );
