@@ -26,13 +26,10 @@ export const SignatureInput: React.FC<Props> = ({ fields, updateFields }) => {
 
   const handleSave = () => {
     const signatureImage = sign.getTrimmedCanvas().toDataURL("image/png");
-    console.log(signatureImage);
     updateFields({ signature: signatureImage });
     updateFields({ signDate: getCurrentDate() });
     setShowSign(true);
   };
-
-  console.log(sign);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_HOST = "https://monash-auto-body.onrender.com";
-// const API_HOST = "http://localhost:4000"
+// const API_HOST = "https://monash-auto-body.onrender.com";
+const API_HOST = "http://localhost:4000"
 const GOOGLE_API = "https://script.google.com/macros/s/AKfycbzrR5yH4RLOebTe05oZXfprpseCa4ZK0NYy1Tr4k7jgPZgTDh9PZAFEBUECp56bQsyv/exec";
 const USER_KEY = "user";
 

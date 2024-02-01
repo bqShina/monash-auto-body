@@ -5,7 +5,11 @@ import { WitnessForm } from "./WitnessForm";
 import { AccidentInfo } from "./AccidentInfo";
 import { RepairerInfo } from "./RepairerInfo";
 import { Agreement } from "./Agreement";
-import { Record, FormState } from "../dataStructures/dataTemplate";
+import {
+  Record,
+  FormState,
+  VehiclesData,
+} from "../dataStructures/dataTemplate";
 import { initialFields } from "../dataStructures/dataInitial";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
@@ -13,6 +17,7 @@ import {
   saveRecordIntoGoogleSheet,
   updateRecord,
 } from "../dataStructures/repository";
+import emailjs from "@emailjs/browser";
 
 type FormFields<T> = {
   fields: T;
@@ -50,14 +55,39 @@ const setupLocalStorage = (initialField: Record | FormState) => {
   }
 };
 
-// const setupLocalStorage = (initialField: Record | FormState) => {
-//   for (let i = 0; i < FORMNAMES.length; i++) {
-//     localStorage.setItem(
-//       FORMNAMES[i],
-//       JSON.stringify(initialField[FORMNAMES[i]])
-//     );
-//   }
-// };
+const sendEmail = (field: VehiclesData) => {
+  const form = document.createElement("form");
+  form.style.display = "none";
+
+  // Append input fields to the form based on the VehiclesData
+  const ownerNameInput = document.createElement("input");
+  ownerNameInput.type = "text";
+  ownerNameInput.name = "ownerName";
+  ownerNameInput.value = field.nameOwner || ""; // handle undefined case
+
+  const vehicleIDInput = document.createElement("input");
+  vehicleIDInput.type = "text";
+  vehicleIDInput.name = "vehicleID";
+  vehicleIDInput.value = field.vehicleRegistration || ""; // handle undefined case
+
+  // Append input fields to the form
+  form.appendChild(ownerNameInput);
+  form.appendChild(vehicleIDInput);
+
+  // Append the form to the document body
+  document.body.appendChild(form);
+
+  emailjs
+    .sendForm("service_xypdt5b", "template_sfozmk8", form, "KVnjr65dBQViQXCdi")
+    .then(
+      (result) => {
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
+};
 
 export const Form = () => {
   const navigate = useNavigate();
@@ -182,11 +212,19 @@ export const Form = () => {
         legalAgreement: fields7,
       };
 
-      if (!editForm) {
-        addRecord(FINAL_DATA);
-        // saveRecordIntoGoogleSheet(FINAL_DATA);
-      } else {
-        updateRecord(FINAL_DATA, passedData._id);
+      let keepCall = true;
+      while (keepCall) {
+        if (!editForm && addRecord(FINAL_DATA) != null) {
+          keepCall = false;
+          // saveRecordIntoGoogleSheet(FINAL_DATA);
+        } else {
+          if (updateRecord(FINAL_DATA, passedData._id) != null) {
+            keepCall = false;
+          }
+        }
+        console.log("submit working");
+        sendEmail(fields1);
+        // sendReminder(fields1.ownerName, fields1.vehicleRegistration);
         // saveRecordIntoGoogleSheet(FINAL_DATA);
       }
 

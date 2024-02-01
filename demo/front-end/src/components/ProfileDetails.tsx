@@ -29,7 +29,6 @@ export const ProfileDetails = () => {
 
   const handleOnClick = () => {
     setIsEditable(!isEditable);
-    console.log("work");
   };
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();

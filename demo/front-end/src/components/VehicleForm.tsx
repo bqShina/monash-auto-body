@@ -31,7 +31,6 @@ export const VehicleForm = ({
   );
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsSameDriver(event.target.checked);
-    console.log("check", isSameDriver);
   };
   // useEffect(() => {
   //   setIsSameDriver(false);

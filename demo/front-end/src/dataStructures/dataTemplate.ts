@@ -18,8 +18,8 @@ export type VehiclesData = {
   licenceNumOwner?: string;
   model?: string;
   nameDriver?: string;
-  nameOwner?: string;
-  vehicleRegistration?: string;
+  nameOwner: string;
+  vehicleRegistration: string;
 }
 
 export type WitnessData = {

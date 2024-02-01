@@ -4,7 +4,7 @@ import { Link, useLoaderData, useLocation } from "react-router-dom";
 export const SuccessContent = () => {
   const location = useLocation();
   const editForm = location.state;
-  console.log(editForm);
+
   return (
     <>
       <div className="container flex-fill success-container">

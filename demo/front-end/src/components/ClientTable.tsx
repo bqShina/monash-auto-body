@@ -32,7 +32,6 @@ export const ClientTable = () => {
   const handlePDFGenerate = async (id: string) => {
     // Make an HTTP request to generate the PDF
     const response = await generateRecordPDF(id);
-    console.log(response);
   };
 
   const handleClick = (client: Record) => {
@@ -40,7 +39,6 @@ export const ClientTable = () => {
   };
   return (
     <>
-      {console.log(clientList)}
       <div className="container mt-3 client-table">
         {showAlert && (
           <div className="alert alert-primary" role="alert">
