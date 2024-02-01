@@ -203,9 +203,6 @@ export const Form = () => {
         localStorage.setItem(FORMNAMES[6], JSON.stringify(fields7));
         break;
     }
-    // localStorage.setItem("clients", JSON.stringify(fields));
-
-    // if (currentStepIndex === 7) {
 
     if (currentStepIndex === 6) {
       if (fields7.signature !== "") {
@@ -219,13 +216,21 @@ export const Form = () => {
           legalAgreement: fields7,
         };
 
+        let keepCall = true;
+        while (keepCall) {
+          if (!editForm && addRecord(FINAL_DATA) != null) {
+            keepCall = false;
+          } else {
+            if (updateRecord(FINAL_DATA, passedData._id) != null) {
+              keepCall = false;
+            }
+          }
+          console.log("submit working");
+        }
+        // send email reminder and save data into google sheet
         if (!editForm) {
-          addRecord(FINAL_DATA);
-          saveRecordIntoGoogleSheet(FINAL_DATA);
           sendEmail(fields1);
-        } else {
-          updateRecord(FINAL_DATA, passedData._id);
-          // saveRecordIntoGoogleSheet(FINAL_DATA);
+          saveRecordIntoGoogleSheet(FINAL_DATA);
         }
 
         setupLocalStorage(initialFields);

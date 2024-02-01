@@ -223,7 +223,7 @@ export const Form = () => {
           }
         }
         console.log("submit working");
-        sendEmail(fields1);
+        // sendEmail(fields1);
         // sendReminder(fields1.ownerName, fields1.vehicleRegistration);
         // saveRecordIntoGoogleSheet(FINAL_DATA);
       }
